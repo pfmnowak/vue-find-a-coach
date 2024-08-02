@@ -9,8 +9,8 @@
         <h2>Interested? Reach out now!</h2>
         <base-button link :to="contactLink">Contact</base-button>
       </header>
+      <router-view></router-view>
     </base-card>
-    <router-view></router-view>
   </section>
   <section>
     <base-card>
@@ -20,11 +20,9 @@
         :title="area"
         :type="area"
       ></base-badge>
+      <p>{{ description }}</p>
     </base-card>
   </section>
-  <div>CoachDetail</div>
-  <router-view></router-view>
-  <router-link to="/coaches/c1/contact">Contact</router-link>
 </template>
 
 <script>
