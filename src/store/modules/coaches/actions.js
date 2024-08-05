@@ -26,7 +26,11 @@ export default {
 
     context.commit('registerCoach', { ...coachData, id: userId });
   },
-  async loadCoaches(context) {
+  async loadCoaches(context, payload) {
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
+    }
+
     const response = await fetch(`${FIREBASE_DB_URL}coaches.json`);
     const responseData = await response.json();
 
@@ -44,5 +48,6 @@ export default {
     });
 
     context.commit('setCoaches', coaches);
+    context.commit('setFetchTimestamp', coaches);
   },
 };
