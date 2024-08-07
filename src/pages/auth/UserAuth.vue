@@ -74,18 +74,16 @@ export default {
 
       this.isLoading = true;
 
+      const authActionPayload = {
+        email: this.email,
+        password: this.password,
+      };
+
       try {
         if (this.mode === 'login') {
-          // later...
-          // this.$store.dispatch('login', {
-          //   email: this.email,
-          //   password: this.password,
-          // });
+          this.$store.dispatch('login', authActionPayload);
         } else {
-          await this.$store.dispatch('signup', {
-            email: this.email,
-            password: this.password,
-          });
+          await this.$store.dispatch('signup', authActionPayload);
         }
       } catch (error) {
         this.error = error.message || 'Failed to authenticate, try later';
