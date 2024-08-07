@@ -13,10 +13,15 @@ export default {
       hourlyRate: data.rate,
     };
 
-    const response = await fetch(`${FIREBASE_DB_URL}coaches/${userId}.json`, {
-      method: 'PUT',
-      body: JSON.stringify(coachData),
-    });
+    const token = context.rootGetters.token;
+
+    const response = await fetch(
+      `${FIREBASE_DB_URL}coaches/${userId}.json?auth=${token}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(coachData),
+      }
+    );
 
     // const responseData = await response.json();
 

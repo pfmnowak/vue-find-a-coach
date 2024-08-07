@@ -7,7 +7,7 @@ export default {
       message: payload.message,
     };
     const response = await fetch(
-      `${FIREBASE_DB_URL}requests${payload.coachId}.json`,
+      `${FIREBASE_DB_URL}requests/${payload.coachId}.json`,
       {
         method: 'POST',
         body: JSON.stringify(newRequest),
@@ -30,7 +30,11 @@ export default {
   },
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
-    const response = await fetch(`${FIREBASE_DB_URL}requests${coachId}.json`);
+    const token = context.rootGetters.token;
+
+    const response = await fetch(
+      `${FIREBASE_DB_URL}requests/${coachId}.json?auth=${token}`
+    );
     const responseData = await response.json();
 
     if (!response.ok) {
